@@ -37,12 +37,19 @@ export const handler = async (): Promise<void | Error> => {
   await dbClient.connect();
 
   // Query
-  const res = await dbClient.query("SELECT $1::text as message", [
-    "Hello world!",
-  ]);
-  console.log(res.rows[0].message); // Hello world!
+  const beforeInsertQuery = await dbClient.query("SELECT * FROM test_table");
+  console.log(beforeInsertQuery.rows);
 
-  // DB Close
+  const insertQuery = await dbClient.query(
+    "INSERT INTO test_table (name) VALUES ($1)",
+    ["non-97"]
+  );
+  console.log(insertQuery.rows);
+
+  const afterInsertQuery = await dbClient.query("SELECT * FROM test_table");
+  console.log(afterInsertQuery.rows);
+
+  // DB Connect Close
   await dbClient.end();
 
   return;
