@@ -184,7 +184,7 @@ export class LambdaAuroraStack extends Stack {
       copyTagsToSnapshot: true,
       credentials: rds.Credentials.fromSecret(dbAdminSecret),
       defaultDatabaseName: "testDB",
-      deletionProtection: true,
+      deletionProtection: false,
       iamAuthentication: false,
       instanceIdentifierBase: DB_INSTANCE_NAME,
       instances: 1,

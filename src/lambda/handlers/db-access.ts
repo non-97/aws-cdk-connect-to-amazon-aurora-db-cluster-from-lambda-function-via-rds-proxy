@@ -26,8 +26,8 @@ export const handler = async (): Promise<void | Error> => {
     password: secret.password,
     port: secret.port,
     ssl: {
-      rejectUnauthorized: false,
-      cert: fs.readFileSync("global-bundle.pem").toString(),
+      rejectUnauthorized: true,
+      cert: fs.readFileSync("global-bundle.pem", "utf-8").toString(),
     },
     // Also OK
     // ssl: true,
